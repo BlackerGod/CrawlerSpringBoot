@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ZMQ.mapper.ProjectTableMapper" >
+  <resultMap id="BaseResultMap" type="ZMQ.model.Project" >
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="descrption" property="descrption" jdbcType="VARCHAR" />
+    <result column="starCount" property="starcount" jdbcType="INTEGER" />
+    <result column="forkCount" property="forkcount" jdbcType="INTEGER" />
+    <result column="openIssueCount" property="openissuecount" jdbcType="INTEGER" />
+    <result column="date" property="date" jdbcType="VARCHAR" />
+  </resultMap>
+  <insert id="insert" parameterType="ZMQ.model.Project" >
+    insert into project_table (name, url, descrption, 
+      starCount, forkCount, openIssueCount, 
+      date)
+    values (#{name,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{descrption,jdbcType=VARCHAR}, 
+      #{starcount,jdbcType=INTEGER}, #{forkcount,jdbcType=INTEGER}, #{openissuecount,jdbcType=INTEGER}, 
+      #{date,jdbcType=VARCHAR})
+  </insert>
+
+  <select id="selectAll" parameterType="java.lang.String" resultMap="BaseResultMap" >
+    select name, url, descrption, starCount, forkCount, openIssueCount, date
+    from project_table
+    where date = #{date,jdbcType=VARCHAR}
+    order by starCount DESC
+  </select>
+</mapper>

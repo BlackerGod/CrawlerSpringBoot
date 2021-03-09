@@ -78,8 +78,14 @@ public class Crawler implements ApplicationRunner {
     }
 
 
+
+    @Scheduled(cron = "0 0 0 * * *")
+    public void start() throws Exception {
+        run(null);
+    }
+
+
     @Override
-    @Scheduled(cron = "0 0 0 * * * *")
     public void run(ApplicationArguments args) throws Exception {
         Crawler crawler = new Crawler();
         //获取我们要抓的页面
